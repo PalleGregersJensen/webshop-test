@@ -1,3 +1,14 @@
 body {
     background-color: red;
 }
+
+#items-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 0.4em;
+}
+
+#items-list, img {
+    width: 60%;
+    height: 40%;
+}
