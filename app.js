@@ -1,6 +1,7 @@
 "use strict";
 
 let items = [];
+let filteredItems = [];
 
 window.addEventListener("load", start);
 
@@ -9,7 +10,9 @@ async function start() {
   console.log("JS kører");
   items = await getJsonFile();
   console.log(items);
-  showItems(items);
+  filteredItems = items;
+  console.log(filteredItems);
+  showItems(filteredItems);
   document.querySelector("#liquor-checkbox").addEventListener("change", filterByLiquorAndBeer);
   document.querySelector("#beer-checkbox").addEventListener("change", filterByLiquorAndBeer);
   document.querySelector("#sort-by").addEventListener("change", handleSortBy);
@@ -40,18 +43,35 @@ function showItems(beerList) {
 // ======== Sort function ===========
 function handleSortBy() {
   const sortBy = document.querySelector("#sort-by").value;
+  const beerCheckboxChecked = document.querySelector("#beer-checkbox").checked;
+  const liquorCheckboxChecked = document.querySelector("#liquor-checkbox").checked;
+  console.log(beerCheckboxChecked);
+  console.log(liquorCheckboxChecked);
+
+  // Først anvender vi filteret baseret på checkbox-status
+  if (beerCheckboxChecked && !liquorCheckboxChecked) {
+    filteredItems = items.filter(checkForBeer);
+  } else if (liquorCheckboxChecked && !beerCheckboxChecked) {
+    filteredItems = items.filter(checkForLiquor);
+  } else if (beerCheckboxChecked && liquorCheckboxChecked) {
+    filteredItems = items; // Hvis begge checkboxe er markeret, viser vi alle elementer
+  } else {
+    // Hvis ingen af checkboxene er markeret, viser vi alle elementer
+    showItems(items);
+  }
+
   if (sortBy === "low-to-high") {
     console.log("low-to-high");
-    items.sort((a, b) => a.price - b.price);
-    showItems(items);
+    filteredItems.sort((a, b) => a.price - b.price);
+    showItems(filteredItems);
   } else if (sortBy === "high-to-low") {
     console.log("high-to-low");
-    items.sort((a, b) => b.price - a.price);
-    showItems(items);
+    filteredItems.sort((a, b) => b.price - a.price);
+    showItems(filteredItems);
   } else if (sortBy === "alphabetical") {
     console.log("alphabetical");
-    items.sort((a, b) => a.name.localeCompare(b.name));
-    showItems(items);
+    filteredItems.sort((a, b) => a.name.localeCompare(b.name));
+    showItems(filteredItems);
   }
 }
 
@@ -60,22 +80,20 @@ function filterByLiquorAndBeer() {
   //============= show liquor ==============
   if (document.querySelector("#liquor-checkbox").checked && !document.querySelector("#beer-checkbox").checked) {
     console.log("liquor checked");
-    const result = items.filter(checkForLiquor);
+    const result = filteredItems.filter(checkForLiquor);
     showItems(result);
     //========== show beer ===============
   } else if (document.querySelector("#beer-checkbox").checked && !document.querySelector("#liquor-checkbox").checked) {
     console.log("beer checked");
-    const result = items.filter(checkForBeer);
+    const result = filteredItems.filter(checkForBeer);
     showItems(result);
     //========== show both beer and liquor ===============
   } else if (!document.querySelector("#liquor-checkbox").checked && !document.querySelector("#beer-checkbox").checked) {
-    showItems(items);
+    showItems(filteredItems);
   } else if (document.querySelector("#liquor-checkbox").checked && document.querySelector("#beer-checkbox").checked) {
-    showItems(items);
-  } else if (document.querySelector("#liquor-checkbox").checked && document.querySelector("#beer-checkbox").checked) {
-    showItems(items);
+    showItems(filteredItems);
   } else if (document.querySelector("#liquor-checkbox").checked && !document.querySelector("#beer-checkbox").checked) {
-    showItems(items);
+    showItems(filteredItems);
   }
 }
 
