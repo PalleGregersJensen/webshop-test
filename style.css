@@ -12,3 +12,11 @@ body {
     width: 60%;
     height: 40%;
 }
+
+#basket-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.4em;
+    width: 30%;
+    margin-right: 1%;
+}

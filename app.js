@@ -2,6 +2,7 @@
 
 let items = [];
 let filteredItems = [];
+let basket = [];
 
 window.addEventListener("load", start);
 
@@ -38,11 +39,12 @@ function showItems(beerList) {
     Price: ${beer.price} <br> <button class="add-to-basket">Add to basket</button></p>`;
     document.querySelector("#items-list").insertAdjacentHTML("beforeend", beerHtml);
   }
-   const addToBasketButtons = document.querySelectorAll(".add-to-basket");
-   addToBasketButtons.forEach((button) => {
-     button.addEventListener("click", addToBasket);
-     console.log(button);
-   });
+  const addToBasketButtons = document.querySelectorAll(".add-to-basket");
+  
+  for (const button of addToBasketButtons) {
+    button.addEventListener("click", addToBasket);
+    console.log(button);
+  }
 }
 
 // ======== Sort function ===========
@@ -121,7 +123,39 @@ function searchFunction() {
   console.log(searchValue);
 }
 
+function addToBasket(event) {
+  const clickedButton = event.target;
+  const itemInfoContainer = clickedButton.parentElement;
+  let itemName = itemInfoContainer.innerText;
+  let breakForName = itemName.indexOf("Description");
+  let breakForPrice = itemName.lastIndexOf("Price:");
+  console.log(breakForName);
+  console.log(breakForPrice);
+  itemName = itemName.slice(0, breakForName);
+  console.log(itemName);
+  let itemPrice = itemInfoContainer.innerText;
+  let lastBreakForprice = itemPrice.lastIndexOf("Add");
+  itemPrice = itemPrice.slice(breakForPrice+7, lastBreakForprice);
+  console.log(itemPrice);
 
-function addToBasket() {
-  console.log("registreres klik");
+  // Opret et objekt for det valgte element
+  const item = {
+    name: itemName,
+    price: itemPrice,
+  };
+
+  // Tilføj det valgte element til "basket" arrayet
+  basket.push(item);
+
+  // Udskriv basket-arrayet til konsollen for at bekræfte, at elementet blev tilføjet
+  console.log("Basket: ", basket);
+  showBasket(basket);
+}
+
+function showBasket(basketList) {
+  document.querySelector("#basket-list").innerHTML = "";
+  for (const basketObject of basketList) {
+    const basketHtml = /*html*/ `<p>Name: ${basketObject.name}, Price: ${basketObject.price}</p>`;
+    document.querySelector("#basket-list").insertAdjacentHTML("beforeend", basketHtml);
+  }
 }
