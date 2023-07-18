@@ -35,9 +35,14 @@ function showItems(beerList) {
     const beerHtml = /*html*/ `<p>${beer.name} <br>
     <img src=${beer.image} alt="beer.caption"/> <br> 
     Description: ${beer.description} <br> 
-    Price: ${beer.price} <br> <button id="add-to-basket">Add to basket</button></p>`;
+    Price: ${beer.price} <br> <button class="add-to-basket">Add to basket</button></p>`;
     document.querySelector("#items-list").insertAdjacentHTML("beforeend", beerHtml);
   }
+   const addToBasketButtons = document.querySelectorAll(".add-to-basket");
+   addToBasketButtons.forEach((button) => {
+     button.addEventListener("click", addToBasket);
+     console.log(button);
+   });
 }
 
 // ======== Sort function ===========
@@ -63,10 +68,12 @@ function handleSortBy() {
   if (sortBy === "low-to-high") {
     console.log("low-to-high");
     filteredItems.sort((a, b) => a.price - b.price);
+    console.log(filteredItems);
     showItems(filteredItems);
   } else if (sortBy === "high-to-low") {
     console.log("high-to-low");
     filteredItems.sort((a, b) => b.price - a.price);
+    console.log(filteredItems);
     showItems(filteredItems);
   } else if (sortBy === "alphabetical") {
     console.log("alphabetical");
@@ -112,4 +119,9 @@ function searchFunction() {
   let searchValue = document.querySelector("#search-field").value;
   searchValue = searchValue.toLowerCase();
   console.log(searchValue);
+}
+
+
+function addToBasket() {
+  console.log("registreres klik");
 }
