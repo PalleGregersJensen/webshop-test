@@ -70,6 +70,8 @@ function filterByLiquor() {
     console.log("liquor checked");
     const result = items.filter(checkForLiquor);
     showItems(result);
+  } else if (!document.querySelector("#liquor-checkbox").checked || !document.querySelector("#beer-checkbox").checked) {
+    showItems(items);
   }
 }
 
