@@ -4,6 +4,7 @@ let items = [];
 
 window.addEventListener("load", start);
 
+// =========== start function ============
 async function start() {
   console.log("JS kører");
   items = await getJsonFile();
@@ -15,6 +16,7 @@ async function start() {
   document.querySelector("#search-field").addEventListener("keyup", searchFunction);
 }
 
+// =========== fetch JSON-file function ============
 async function getJsonFile() {
   const response = await fetch("list-of-items.json");
   console.log(response);
@@ -23,6 +25,7 @@ async function getJsonFile() {
   return data;
 }
 
+// =========== show beer and liquor function ============
 function showItems(beerList) {
   document.querySelector("#items-list").innerHTML = "";
   for (const beer of beerList) {
@@ -52,23 +55,19 @@ function handleSortBy() {
   }
 }
 
-// function filterByBeer() {
-//   if (document.querySelector("#beer-checkbox").checked && !document.querySelector("#liquor-checkbox").checked) {
-//     console.log("beer checked");
-//     const result = items.filter(checkForBeer);
-//     showItems(result);
-//   }
-// }
-
+// =========== filter function ============
 function filterByLiquorAndBeer() {
+  //============= show liquor ==============
   if (document.querySelector("#liquor-checkbox").checked && !document.querySelector("#beer-checkbox").checked) {
     console.log("liquor checked");
     const result = items.filter(checkForLiquor);
     showItems(result);
+    //========== show beer ===============
   } else if (document.querySelector("#beer-checkbox").checked && !document.querySelector("#liquor-checkbox").checked) {
     console.log("beer checked");
     const result = items.filter(checkForBeer);
     showItems(result);
+    //========== show both beer and liquor ===============
   } else if (!document.querySelector("#liquor-checkbox").checked && !document.querySelector("#beer-checkbox").checked) {
     showItems(items);
   } else if (document.querySelector("#liquor-checkbox").checked && document.querySelector("#beer-checkbox").checked) {
@@ -80,14 +79,17 @@ function filterByLiquorAndBeer() {
   }
 }
 
+// =========== check for liquor function ============
 function checkForLiquor(items) {
   return items.type === "liquor";
 }
 
+// =========== check for beer function ============
 function checkForBeer(items) {
   return items.type === "beer";
 }
 
+// =========== search function ============
 function searchFunction() {
   let searchValue = document.querySelector("#search-field").value;
   searchValue = searchValue.toLowerCase();
