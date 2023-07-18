@@ -3,34 +3,55 @@
     "name": "Rodenbach Grand Cru",
     "price": 20,
     "image": "https://brygshoppen.dk/cdn/shop/products/rodenbach-grand-cru-33cl.png?v=1607873505&width=713",
-    "description": "Sour beer"
+    "description": "Sour beer",
+    "type": "beer"
   },
 
   {
     "name": "Miller Genuine Draft",
     "price": 15,
     "image": "https://www.gourmetencasa-tcm.com/18707-large_default/miller-genuine-draft-33cl.jpg",
-    "description": "Draft beer"
+    "description": "Draft beer",
+    "type": "beer"
   },
 
   {
     "name": "Paulaner Weissbier",
     "price": 25,
     "image": "https://www.vildmedvin.dk/img/600/600/resize/p/a/paulaner.jpg",
-    "description": "Weiss bier"
+    "description": "Weiss bier",
+    "type": "beer"
   },
 
   {
     "name": "Ceres TOP Pilsner",
     "price": 10,
     "image": "https://cdn.bevco.dk/cdn-cgi/image/format%3Dauto/https%3A//cdn.bevco.dk/thumbnail/f3/4f/80/1643802144/ceres-top-pilsner-4-6-30x33-cl-flaske-1029c_644x644.png",
-    "description": "Regular beer"
+    "description": "Regular beer",
+    "type": "beer"
   },
 
   {
     "name": "Teedawn Light in the dark",
     "price": 20,
     "image": "https://cdn.bevco.dk/cdn-cgi/image/format%3Dauto/https%3A//cdn.bevco.dk/thumbnail/61/07/5e/1687500323/LightInTheDark_Bottle_Dry_Hi_644x644.jpg",
-    "description": "Pale ale"
+    "description": "Pale ale",
+    "type": "beer"
+  },
+
+  {
+    "name": "Four Roses Bourbon Whiskey",
+    "price": 150,
+    "image": "https://shop14539.sfstatic.io/upload_dir/shop/_thumbs/830262.w117.h211.fill.jpg",
+    "description": "Traditional bourbon",
+    "type": "liquor"
+  },
+
+  {
+    "name": "Barska vodka",
+    "price": 100,
+    "image": "https://shop14539.sfstatic.io/upload_dir/shop/_thumbs/Barska_Premium_Vodka.w610.h610.fill.jpeg",
+    "description": "Traditional vodka",
+    "type": "liquor"
   }
 ]

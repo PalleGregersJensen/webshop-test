@@ -9,7 +9,8 @@ async function start() {
   items = await getJsonFile();
   console.log(items);
     showItems(items);
-    document.querySelector("#sort-by").addEventListener("change", handleSortBy);
+  document.querySelector("#sort-by").addEventListener("change", handleSortBy);
+  document.querySelector("#search-field").addEventListener("keyup", searchFunction);
 }
 
 async function getJsonFile() {
@@ -23,10 +24,10 @@ async function getJsonFile() {
 function showItems(beerList) {
     document.querySelector("#items-list").innerHTML = "";
   for (const beer of beerList) {
-    const beerHtml = /*html*/ `<li>${beer.name}, 
-    <img src=${beer.image} alt="beer.caption"/>, 
-    ${beer.description}, 
-    ${beer.price} <button id="add-to-basket">Add to basket</button></li>`;
+    const beerHtml = /*html*/ `<p>${beer.name} <br>
+    <img src=${beer.image} alt="beer.caption"/> <br> 
+    Description: ${beer.description} <br> 
+    Price: ${beer.price} <br> <button id="add-to-basket">Add to basket</button></p>`;
     document.querySelector("#items-list").insertAdjacentHTML("beforeend", beerHtml);
   }
 }
@@ -46,4 +47,12 @@ function handleSortBy() {
         items.sort((a, b) => a.name.localeCompare(b.name));
         showItems(items);
     }
+}
+
+function searchFunction() {
+  let searchValue = document.querySelector("#search-field").value;
+  searchValue = searchValue.toLowerCase();
+  console.log(searchValue);
+  
+  // showItems(searchValue);
 }
