@@ -34,6 +34,7 @@ function showItems(beerList) {
   }
 }
 
+// ======== Sort function ===========
 function handleSortBy() {
   const sortBy = document.querySelector("#sort-by").value;
   if (sortBy === "low-to-high") {
@@ -51,14 +52,9 @@ function handleSortBy() {
   }
 }
 
-function searchFunction() {
-  let searchValue = document.querySelector("#search-field").value;
-  searchValue = searchValue.toLowerCase();
-  console.log(searchValue);
-}
 
 function filterByBeer() {
-  if (document.querySelector("#beer-checkbox").checked) {
+  if (document.querySelector("#beer-checkbox").checked && !document.querySelector("#liquor-checkbox").checked) {
     console.log("beer checked");
     const result = items.filter(checkForBeer);
     showItems(result);
@@ -66,11 +62,13 @@ function filterByBeer() {
 }
 
 function filterByLiquor() {
-  if (document.querySelector("#liquor-checkbox").checked) {
+  if (document.querySelector("#liquor-checkbox").checked && !document.querySelector("#beer-checkbox").checked) {
     console.log("liquor checked");
     const result = items.filter(checkForLiquor);
     showItems(result);
   } else if (!document.querySelector("#liquor-checkbox").checked || !document.querySelector("#beer-checkbox").checked) {
+    showItems(items);
+  } else if (document.querySelector("#liquor-checkbox").checked && document.querySelector("#beer-checkbox").checked) {
     showItems(items);
   }
 }
@@ -83,3 +81,8 @@ function checkForBeer(items) {
   return items.type === "beer";
 }
 
+function searchFunction() {
+  let searchValue = document.querySelector("#search-field").value;
+  searchValue = searchValue.toLowerCase();
+  console.log(searchValue);
+}
