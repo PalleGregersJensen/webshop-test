@@ -3,6 +3,7 @@
 let items = [];
 let filteredItems = [];
 let basket = [];
+let price;
 let priceInAll = 0;
 
 window.addEventListener("load", start);
@@ -167,8 +168,9 @@ function showBasket(basketList) {
 function showPriceInAll(basketList) {
   document.querySelector("#basket-total").innerHTML = "";
   for (const basketObject of basketList) {
-    priceInAll = priceInAll + basketObject.price;
+     price = basketObject.price;
   }
+  priceInAll = priceInAll + price;
   console.log(priceInAll);
   document.querySelector("#basket-total").textContent = `Price in total: ${priceInAll}`;
 }
