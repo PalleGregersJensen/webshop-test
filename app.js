@@ -3,6 +3,7 @@
 let items = [];
 let filteredItems = [];
 let basket = [];
+let priceInAll = 0;
 
 window.addEventListener("load", start);
 
@@ -40,7 +41,7 @@ function showItems(beerList) {
     document.querySelector("#items-list").insertAdjacentHTML("beforeend", beerHtml);
   }
   const addToBasketButtons = document.querySelectorAll(".add-to-basket");
-  
+
   for (const button of addToBasketButtons) {
     button.addEventListener("click", addToBasket);
     console.log(button);
@@ -135,7 +136,9 @@ function addToBasket(event) {
   console.log(itemName);
   let itemPrice = itemInfoContainer.innerText;
   let lastBreakForprice = itemPrice.lastIndexOf("Add");
-  itemPrice = itemPrice.slice(breakForPrice+7, lastBreakForprice);
+  itemPrice = itemPrice.slice(breakForPrice + 7, lastBreakForprice);
+  console.log(itemPrice);
+  itemPrice = Number(itemPrice);
   console.log(itemPrice);
 
   // Opret et objekt for det valgte element
@@ -158,4 +161,14 @@ function showBasket(basketList) {
     const basketHtml = /*html*/ `<p>Name: ${basketObject.name}, Price: ${basketObject.price}</p>`;
     document.querySelector("#basket-list").insertAdjacentHTML("beforeend", basketHtml);
   }
+  showPriceInAll(basket);
+}
+
+function showPriceInAll(basketList) {
+  document.querySelector("#basket-total").innerHTML = "";
+  for (const basketObject of basketList) {
+    priceInAll = priceInAll + basketObject.price;
+  }
+  console.log(priceInAll);
+  document.querySelector("#basket-total").textContent = `Price in total: ${priceInAll}`;
 }
