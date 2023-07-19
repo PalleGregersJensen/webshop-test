@@ -1,5 +1,7 @@
 "use strict";
 
+const endpoint = "https://webshop-test-93659-default-rtdb.firebaseio.com/";
+
 let items = [];
 let filteredItems = [];
 let basket = [];
@@ -24,12 +26,27 @@ async function start() {
 
 // =========== fetch JSON-file function ============
 async function getJsonFile() {
-  const response = await fetch("list-of-items.json");
+  const response = await fetch(`${endpoint}.json`);
   console.log(response);
   const data = await response.json();
   console.log(data);
-  return data;
+  items = prepareData(data);
+  return items;
 }
+
+// convert object of objects til an array of objects
+function prepareData(dataObject) {
+  const array = []; // define empty array
+  // loop through every key in dataObject
+  // the value of every key is an object
+  for (const key in dataObject) {
+    const object = dataObject[key]; // define object
+    object.id = key; // add the key in the prop id
+    array.push(object); // add the object to array
+  }
+  return array; // return array back to "the caller"
+}
+
 
 // =========== show beer and liquor function ============
 function showItems(beerList) {
