@@ -123,7 +123,22 @@ function searchFunction() {
   let searchValue = document.querySelector("#search-field").value;
   searchValue = searchValue.toLowerCase();
   console.log(searchValue);
+  const searchResult = searchInput(searchValue);
+  console.log(searchResult);
+  showItems(searchResult);
 }
+
+function searchInput(searchValue) {
+  searchValue = searchValue.toLowerCase();
+  const results = items.filter(checkSearchValue);
+
+  function checkSearchValue(item) {
+    let result = item.name.toLowerCase();
+    console.log(result);
+    return result.includes(searchValue); // Opdateret denne linje
+  }
+return results
+}  
 
 function addToBasket(event) {
   const clickedButton = event.target;
@@ -156,6 +171,7 @@ function addToBasket(event) {
   showBasket(basket);
 }
 
+// Vis basket-arrayet på hjemmeside
 function showBasket(basketList) {
   document.querySelector("#basket-list").innerHTML = "";
   for (const basketObject of basketList) {
@@ -165,10 +181,11 @@ function showBasket(basketList) {
   showPriceInAll(basket);
 }
 
+// =========== Vis samlet pris på varer i basket =============
 function showPriceInAll(basketList) {
   document.querySelector("#basket-total").innerHTML = "";
   for (const basketObject of basketList) {
-     price = basketObject.price;
+    price = basketObject.price;
   }
   priceInAll = priceInAll + price;
   console.log(priceInAll);
