@@ -29,22 +29,22 @@
     
     <!-- dialog create new item -->
     <dialog id="dialog-create-new-item">
-      <form id="create-new-item">
+      <form id="form-create-new-item" method="dialog">
         <label>Create new item</label> <br>
         <label>Name</label>
-        <input type="text" />
+        <input id="name" type="text" value="name"/> <br>
         <label>Price</label>
-        <input type="number" />
+        <input id="price" type="number" value="price"/> <br>
         <label>Image</label>
-        <input type="url" />
+        <input id="image" type="url" value="image"/> <br>
         <label>Description</label>
-        <input type="text" />
+        <input id="description" type="text" value="description"/> <br>
         <label>Type</label> <br>
         <label>Beer</label>
         <input name="type" value="beer" type="radio"/>
-        <label>Liquor</label>
-        <input name="type" value="liquor" type="radio"/>
-        <input type="submit" value="Submit">
+        <label>Liquor</label> 
+        <input name="type" value="liquor" type="radio"/> <br>
+        <input type="submit" value="submit">
       </form>
     </dialog>
     

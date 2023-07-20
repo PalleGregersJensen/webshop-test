@@ -30,9 +30,13 @@ async function start() {
   document.querySelector("#beer-checkbox").addEventListener("change", filterByLiquorAndBeer);
   document.querySelector("#sort-by").addEventListener("change", handleSortBy);
   document.querySelector("#search-field").addEventListener("keyup", searchFunction);
-  document.querySelector("#create-new-item-button").addEventListener("click", createNewItem);
+  document.querySelector("#create-new-item-button").addEventListener("click", openDialogToCreateNewItem);
+  
 }
-
+function openDialogToCreateNewItem (event) {
+  document.querySelector("#dialog-create-new-item").showModal();
+  document.querySelector("#form-create-new-item").addEventListener("submit", createNewItem);
+}
 // =========== fetch JSON-file-beers function ============
 async function getJsonFileBeers() {
   const response = await fetch(`${endpoint}/beers.json`);
@@ -228,3 +232,6 @@ function showPriceInAll(basketList) {
   console.log(priceInAll);
   document.querySelector("#basket-total").textContent = `Price in total: ${priceInAll}`;
 }
+
+
+export { items };
