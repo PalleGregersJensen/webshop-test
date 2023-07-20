@@ -1,7 +1,7 @@
 import { items, endpoint, start } from "./app.js"
 
 
-async function createNewItem(event) {
+async function createNewItemBeer(event) {
     console.log("Create new item");
     event.preventDefault();
     const form = event.target;
@@ -46,4 +46,4 @@ function createNewItemObject(name, price, image, description, type) {
 
 
 
-export {createNewItem}
+export {createNewItemBeer}

@@ -1,4 +1,4 @@
-import { createNewItem } from "./crud-functions.js";
+import { createNewItemBeer } from "./crud-functions.js";
 
 "use strict";
 
@@ -35,7 +35,7 @@ async function start() {
 }
 function openDialogToCreateNewItem (event) {
   document.querySelector("#dialog-create-new-item").showModal();
-  document.querySelector("#form-create-new-item").addEventListener("submit", createNewItem);
+  document.querySelector("#form-create-new-item").addEventListener("submit", createNewItemBeer);
 }
 // =========== fetch JSON-file-beers function ============
 async function getJsonFileBeers() {
