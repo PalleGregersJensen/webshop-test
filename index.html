@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="#" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="#" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
     <title>Webshp-test</title>
-</head>
-<body>
+  </head>
+  <body>
     <h2>Webshop</h2>
+    <button id="create-new-item-button">Create new item</button><br>
     <label>Search</label>
-    <input id="search-field">
+    <input id="search-field" />
     <label>Beer</label>
-    <input id="beer-checkbox" type="checkbox" value="beer">
+    <input id="beer-checkbox" type="checkbox" value="beer" />
     <label>Liquor</label>
-    <input id="liquor-checkbox" type="checkbox" value="liquor">
+    <input id="liquor-checkbox" type="checkbox" value="liquor" />
     <select id="sort-by" value="sort-by">
         <option value=""></option>
         <option value="low-to-high">Price low-to-high</option>
@@ -22,10 +23,31 @@
         <option value="alphabetical">Alphabetical</option>
     </select>
     <h2 id="basket-headline">Basket</h2>
-    <div id="basket-list"></div> 
-    <div id="basket-total"></div>   
+    <div id="basket-list"></div>
+    <div id="basket-total"></div>
     <div id="items-list"></div>
-
-    <script src="app.js"></script>
-</body>
+    
+    <!-- dialog create new item -->
+    <dialog id="dialog-create-new-item">
+      <form id="create-new-item">
+        <label>Create new item</label> <br>
+        <label>Name</label>
+        <input type="text" />
+        <label>Price</label>
+        <input type="number" />
+        <label>Image</label>
+        <input type="url" />
+        <label>Description</label>
+        <input type="text" />
+        <label>Type</label> <br>
+        <label>Beer</label>
+        <input name="type" value="beer" type="radio"/>
+        <label>Liquor</label>
+        <input name="type" value="liquor" type="radio"/>
+        <input type="submit" value="Submit">
+      </form>
+    </dialog>
+    
+    <script src="app.js" type="module"></script>
+  </body>
 </html>

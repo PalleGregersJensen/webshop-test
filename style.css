@@ -33,3 +33,8 @@ img {
     position: absolute;
     right: 10%;
 }
+
+#create-item {
+    display: grid;
+    grid-template-columns: auto auto;
+}

@@ -1,3 +1,5 @@
+import { createNewItem } from "./crud-functions.js";
+
 "use strict";
 
 const endpoint = "https://webshop-test-93659-default-rtdb.firebaseio.com/";
@@ -28,9 +30,10 @@ async function start() {
   document.querySelector("#beer-checkbox").addEventListener("change", filterByLiquorAndBeer);
   document.querySelector("#sort-by").addEventListener("change", handleSortBy);
   document.querySelector("#search-field").addEventListener("keyup", searchFunction);
+  document.querySelector("#create-new-item-button").addEventListener("click", createNewItem);
 }
 
-// =========== fetch JSON-file function ============
+// =========== fetch JSON-file-beers function ============
 async function getJsonFileBeers() {
   const response = await fetch(`${endpoint}/beers.json`);
   console.log(response);
@@ -40,7 +43,7 @@ async function getJsonFileBeers() {
   return beerItems;
 }
 
-// =========== fetch JSON-file function ============
+// =========== fetch JSON-file-liquor function ============
 async function getJsonFileLiquor() {
   const response = await fetch(`${endpoint}/liquor.json`);
   console.log(response);
@@ -51,7 +54,7 @@ async function getJsonFileLiquor() {
 }
 
 
-// convert object of objects til an array of objects
+// convert object of objects til an array of objects - both beers and liquor
 function prepareData(dataObject) {
   const array = []; // define empty array
   // loop through every key in dataObject
