@@ -2,6 +2,8 @@
 
 const endpoint = "https://webshop-test-93659-default-rtdb.firebaseio.com/";
 
+let beerItems = [];
+let liquorItems = [];
 let items = [];
 let filteredItems = [];
 let basket = [];
@@ -13,7 +15,11 @@ window.addEventListener("load", start);
 // =========== start function ============
 async function start() {
   console.log("JS kører");
-  items = await getJsonFile();
+  beerItems = await getJsonFileBeers();
+  console.log(beerItems);
+  liquorItems = await getJsonFileLiquor();
+  console.log(liquorItems);
+  items = beerItems.concat(liquorItems);
   console.log(items);
   filteredItems = items;
   console.log(filteredItems);
@@ -25,14 +31,25 @@ async function start() {
 }
 
 // =========== fetch JSON-file function ============
-async function getJsonFile() {
-  const response = await fetch(`${endpoint}.json`);
+async function getJsonFileBeers() {
+  const response = await fetch(`${endpoint}/beers.json`);
   console.log(response);
   const data = await response.json();
   console.log(data);
-  items = prepareData(data);
-  return items;
+  beerItems = prepareData(data);
+  return beerItems;
 }
+
+// =========== fetch JSON-file function ============
+async function getJsonFileLiquor() {
+  const response = await fetch(`${endpoint}/liquor.json`);
+  console.log(response);
+  const data = await response.json();
+  console.log(data);
+  liquorItems = prepareData(data);
+  return liquorItems;
+}
+
 
 // convert object of objects til an array of objects
 function prepareData(dataObject) {
