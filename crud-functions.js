@@ -1,6 +1,7 @@
-import {items} from "./app.js"
+import { items, endpoint, start } from "./app.js"
 
-function createNewItem(event) {
+
+async function createNewItem(event) {
     console.log("Create new item");
     event.preventDefault();
     const form = event.target;
@@ -11,6 +12,17 @@ function createNewItem(event) {
     const type = form.type.value;
     const newItem = createNewItemObject(name, price, image, description, type);
     console.log(newItem);
+    const json = JSON.stringify(newItem);
+    console.log(json);
+    const response = await fetch(`${endpoint}/beers.json`, {
+        method: "POST",
+        body: json,
+    });
+    if (response.ok) {
+        console.log("New items added");
+        start();
+    }
+    
     items.push(newItem);
     console.log(items);
     form.reset();
