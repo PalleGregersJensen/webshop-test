@@ -41,9 +41,4 @@ function createNewItemObject(name, price, image, description, type) {
 
 
 
-
-
-
-
-
 export {createNewItemBeer}
