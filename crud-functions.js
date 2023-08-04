@@ -40,5 +40,12 @@ function createNewItemObject(name, price, image, description, type) {
 }
 
 
+function updateItem() {
+    console.log("update item");
+}
 
-export {createNewItemBeer}
+function deleteItem() {
+    console.log("delete item");
+}
+
+export {createNewItemBeer, deleteItem, updateItem}

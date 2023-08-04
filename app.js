@@ -1,4 +1,4 @@
-import { createNewItemBeer } from "./crud-functions.js";
+import { createNewItemBeer, updateItem, deleteItem } from "./crud-functions.js";
 
 "use strict";
 
@@ -79,13 +79,25 @@ function showItems(beerList) {
     const beerHtml = /*html*/ `<p>${beer.name} <br>
     <img src=${beer.image} alt="beer.caption"/> <br> 
     Description: ${beer.description} <br> 
-    Price: ${beer.price} <br> <button class="add-to-basket">Add to basket</button></p>`;
+    Price: ${beer.price} <br> <button class="add-to-basket">Add to basket</button> <button class="delete-item-button">Delete item</button> <button class="update-item-button">Update item</button></p>`;
     document.querySelector("#items-list").insertAdjacentHTML("beforeend", beerHtml);
   }
   const addToBasketButtons = document.querySelectorAll(".add-to-basket");
+  const deleteItemButtons = document.querySelectorAll(".delete-item-button");
+  const updateItemButtons = document.querySelectorAll(".update-item-button");
 
   for (const button of addToBasketButtons) {
     button.addEventListener("click", addToBasket);
+    console.log(button);
+  }
+
+  for (const button of deleteItemButtons) {
+    button.addEventListener("click", deleteItem);
+    console.log(button);
+  }
+
+  for (const button of updateItemButtons) {
+    button.addEventListener("click", updateItem);
     console.log(button);
   }
 }
