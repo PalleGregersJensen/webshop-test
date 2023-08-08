@@ -46,6 +46,10 @@ function updateItem() {
 
 function deleteItem() {
     console.log("delete item");
+    const beerObject = event.target.parentElement;
+    console.log(beerObject);    
+    const itemToBeDeleted = beerObject.setAttribute("data-id", beerObject.id);
+    console.log(itemToBeDeleted);
 }
 
 export {createNewItemBeer, deleteItem, updateItem}
