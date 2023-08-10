@@ -25,6 +25,7 @@ async function start() {
   console.log(items);
   filteredItems = items;
   console.log(filteredItems);
+  console.log(endpoint);
   showItems(filteredItems);
   document.querySelector("#liquor-checkbox").addEventListener("change", filterByLiquorAndBeer);
   document.querySelector("#beer-checkbox").addEventListener("change", filterByLiquorAndBeer);
@@ -250,4 +251,4 @@ function showPriceInAll(basketList) {
   document.querySelector("#basket-total").textContent = `Price in total: ${priceInAll}`;
 }
 
-export { items, endpoint, start };
+export { items, endpoint, start, beerItems, liquorItems };

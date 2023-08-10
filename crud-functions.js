@@ -1,4 +1,4 @@
-import { items, endpoint, start } from "./app.js";
+import { items, endpoint, start, liquorItems, beerItems } from "./app.js";
 
 async function createNewItemBeer(event) {
   console.log("Create new item");
@@ -45,7 +45,7 @@ function updateItem() {
 // Slet et eksisterende element
 async function deleteItemClicked(event) {
   console.log("delete item");
-    const beerObject = event.target.parentElement;
+  const beerObject = event.target; 
     console.log(beerObject);
     const itemId = beerObject.getAttribute("data-id");
     console.log(itemId);
