@@ -1,6 +1,6 @@
 import { createNewItemBeer, updateItem, deleteItemClicked } from "./crud-functions.js";
 
-"use strict";
+("use strict");
 
 const endpoint = "https://webshop-test-93659-default-rtdb.firebaseio.com/";
 
@@ -31,9 +31,8 @@ async function start() {
   document.querySelector("#sort-by").addEventListener("change", handleSortBy);
   document.querySelector("#search-field").addEventListener("keyup", searchFunction);
   document.querySelector("#create-new-item-button").addEventListener("click", openDialogToCreateNewItem);
-  
 }
-function openDialogToCreateNewItem (event) {
+function openDialogToCreateNewItem(event) {
   document.querySelector("#dialog-create-new-item").showModal();
   document.querySelector("#form-create-new-item").addEventListener("submit", createNewItemBeer);
 }
@@ -57,7 +56,6 @@ async function getJsonFileLiquor() {
   return liquorItems;
 }
 
-
 // convert object of objects til an array of objects - both beers and liquor
 function prepareData(dataObject) {
   const array = []; // define empty array
@@ -71,16 +69,19 @@ function prepareData(dataObject) {
   return array; // return array back to "the caller"
 }
 
-
 // =========== show beer and liquor function ============
 function showItems(beerList) {
   document.querySelector("#items-list").innerHTML = "";
   for (const beer of beerList) {
     const beerHtml = /*html*/ `<p>${beer.name} <br>
-    <img src=${beer.image} alt="beer.caption"/> <br> 
-    Description: ${beer.description} <br> 
-    Price: ${beer.price} <br> <button class="add-to-basket">Add to basket</button> <button class="delete-item-button" data-id="item_id">Delete item</button> <button class="update-item-button">Update item</button></p>`;
+<img src=${beer.image} alt="beer.caption"/> <br> 
+Description: ${beer.description} <br> 
+Price: ${beer.price} <br> 
+<button class="add-to-basket">Add to basket</button> 
+<button class="delete-item-button" data-id="${beer.id}">Delete item</button> 
+<button class="update-item-button">Update item</button></p>`;
     document.querySelector("#items-list").insertAdjacentHTML("beforeend", beerHtml);
+    console.log(beer.id);
   }
   const addToBasketButtons = document.querySelectorAll(".add-to-basket");
   const deleteItemButtons = document.querySelectorAll(".delete-item-button");
@@ -92,9 +93,13 @@ function showItems(beerList) {
   }
 
   for (const button of deleteItemButtons) {
-    button.addEventListener("click", deleteItemClicked);
-    // console.log(button);
+    button.addEventListener("click", (event) => deleteItemClicked(event));
   }
+
+  // for (const button of deleteItemButtons) {
+  //   button.addEventListener("click", deleteItemClicked);
+  //   // console.log(button);
+  // }
 
   for (const button of updateItemButtons) {
     button.addEventListener("click", updateItem);
@@ -190,8 +195,8 @@ function searchInput(searchValue) {
     console.log(result);
     return result.includes(searchValue); // Opdateret denne linje
   }
-return results
-}  
+  return results;
+}
 
 function addToBasket(event) {
   const clickedButton = event.target;
@@ -244,6 +249,5 @@ function showPriceInAll(basketList) {
   console.log(priceInAll);
   document.querySelector("#basket-total").textContent = `Price in total: ${priceInAll}`;
 }
-
 
 export { items, endpoint, start };

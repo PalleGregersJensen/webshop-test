@@ -51,13 +51,14 @@ async function deleteItemClicked(event) {
     console.log(itemId);
   
   const response = await deleteItem(itemId);
+  console.log(response);
   if (response.ok) {
     console.log("Item deleted");
     start();
   }
 }
 
-// delete an existing movie - HTTP Method: DELETE
+// delete an existing item - HTTP Method: DELETE
 async function deleteItem(id) {
   const response = await fetch(`${endpoint}/beers/${id}.json`, {
     method: "DELETE",
