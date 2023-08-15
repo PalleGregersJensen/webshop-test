@@ -45,25 +45,54 @@ function updateItem() {
 // Slet et eksisterende element
 async function deleteItemClicked(event) {
   console.log("delete item");
-  const beerObject = event.target; 
-    console.log(beerObject);
-    const itemId = beerObject.getAttribute("data-id");
-    console.log(itemId);
-  
-  const response = await deleteItem(itemId);
-  console.log(response);
-  if (response.ok) {
-    console.log("Item deleted");
-    start();
+  const beerOrLiquorObject = event.target;
+  console.log(beerOrLiquorObject);
+  const itemId = beerOrLiquorObject.getAttribute("data-id");
+  console.log(itemId);
+  let beerOrLiquorElement = beerOrLiquorObject.parentElement;
+  console.log(beerOrLiquorElement);
+  // beerOrLiquorElement = beerOrLiquorElement.firstChild;
+  beerOrLiquorElement = beerOrLiquorElement.innerText;
+  console.log(beerOrLiquorElement);
+  let liquorElementString = beerOrLiquorElement.slice(0, 6); // Corrected conversion
+  console.log(liquorElementString);
+  let beerElementString = beerOrLiquorElement.slice(0, 4); // Corrected conversion
+  console.log(beerElementString);
+
+  if (beerElementString === "beer") {
+    console.log("delete beer");
+    const response = await deleteItemBeer(itemId);
+    console.log(response);
+    if (response.ok) {
+      console.log("Beer item deleted");
+      start();
+    }
+  } else if (liquorElementString === "liquor") {
+    console.log("delete liquor");
+    const response = await deleteItemLiquor(itemId);
+    console.log(response);
+    if (response.ok) {
+      console.log("Liquor item deleted");
+      start();
+    }
   }
 }
 
 // delete an existing item - HTTP Method: DELETE
-async function deleteItem(id) {
+async function deleteItemBeer(id) {
   const response = await fetch(`${endpoint}/beers/${id}.json`, {
     method: "DELETE",
   });
   return response;
 }
 
-export { createNewItemBeer, deleteItem, updateItem, deleteItemClicked };
+  // delete an existing item - HTTP Method: DELETE
+async function deleteItemLiquor(id) {
+  const response = await fetch(`${endpoint}/liquor/${id}.json`, {
+    method: "DELETE",
+  });
+  return response;
+}
+
+  
+export { createNewItemBeer, deleteItemBeer, updateItem, deleteItemClicked, deleteItemLiquor };

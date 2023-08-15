@@ -74,7 +74,7 @@ function prepareData(dataObject) {
 function showItems(beerList) {
   document.querySelector("#items-list").innerHTML = "";
   for (const beer of beerList) {
-    const beerHtml = /*html*/ `<p>${beer.name} <br>
+    const beerHtml = /*html*/ `<p> ${beer.type} <br>${beer.name} <br>
 <img src=${beer.image} alt="beer.caption"/> <br> 
 Description: ${beer.description} <br> 
 Price: ${beer.price} <br> 
