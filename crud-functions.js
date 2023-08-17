@@ -38,8 +38,35 @@ function createNewItemObject(name, price, image, description, type) {
   return item;
 }
 
-function updateItem() {
+function updateItemClicked() {
+  console.log("update item clicked");
+  document.querySelector("#dialog-update-item").showModal();
+}
+
+async function updateItem(event) {
   console.log("update item");
+  const form = event.target;
+  console.log(form);
+  const name = form.name.value;
+  console.log(name);
+  const description = form.description.value;
+  console.log(description);
+  const image = form.image.value;
+  const director = form.director.value;
+  const movieLength = Number(form.lengthminutes.value);
+  const yearpublished = Number(form.yearpublished.value);
+  const color = Boolean(form.color.value);
+
+  const id = form.getAttribute("data-id");
+  const response = await updateMovie(id, title, description, image, director, movieLength, yearpublished, color);
+  if (response.ok) {
+    console.log("Movie succesfully updatet in firebase");
+    updateMovieGrid();
+  } else {
+    console.log("Something went wrong. Please try again");
+    document.querySelector("#error-message-update").textContent = "Something went wrong. Please try again.";
+    document.querySelector("#update-movie-dialog").showModal();
+  }
 }
 
 // Slet et eksisterende element
@@ -95,4 +122,4 @@ async function deleteItemLiquor(id) {
 }
 
   
-export { createNewItemBeer, deleteItemBeer, updateItem, deleteItemClicked, deleteItemLiquor };
+export { createNewItemBeer, deleteItemBeer, updateItem, deleteItemClicked, deleteItemLiquor, updateItemClicked};

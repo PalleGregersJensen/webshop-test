@@ -1,4 +1,4 @@
-import { createNewItemBeer, updateItem, deleteItemClicked } from "./crud-functions.js";
+import { createNewItemBeer, updateItem, deleteItemClicked, updateItemClicked } from "./crud-functions.js";
 
 ("use strict");
 
@@ -32,6 +32,8 @@ async function start() {
   document.querySelector("#sort-by").addEventListener("change", handleSortBy);
   document.querySelector("#search-field").addEventListener("keyup", searchFunction);
   document.querySelector("#create-new-item-button").addEventListener("click", openDialogToCreateNewItem);
+  // document.querySelector("#form-update-item").addEventListener("click", updateItemClicked);
+  // document.querySelector("#form-update-item").showModal();
 }
 function openDialogToCreateNewItem(event) {
   document.querySelector("#dialog-create-new-item").showModal();
@@ -103,7 +105,7 @@ Price: ${beer.price} <br>
   // }
 
   for (const button of updateItemButtons) {
-    button.addEventListener("click", updateItem);
+    button.addEventListener("click", updateItemClicked);
     // console.log(button);
   }
 }
@@ -251,4 +253,4 @@ function showPriceInAll(basketList) {
   document.querySelector("#basket-total").textContent = `Price in total: ${priceInAll}`;
 }
 
-export { items, endpoint, start, beerItems, liquorItems };
+export { items, endpoint, start, beerItems, liquorItems, };
