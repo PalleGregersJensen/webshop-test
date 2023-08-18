@@ -13,15 +13,26 @@ async function createNewItemBeer(event) {
   console.log(newItem);
   const json = JSON.stringify(newItem);
   console.log(json);
-  const response = await fetch(`${endpoint}/beers.json`, {
-    method: "POST",
-    body: json,
-  });
-  if (response.ok) {
-    console.log("New items added");
-    start();
+  if(type === "beer") {
+    const response = await fetch(`${endpoint}/beers.json`, {
+      method: "POST",
+      body: json,
+    });
+    if (response.ok) {
+      console.log("New items added");
+      start();
+    }
   }
-
+  if (type === "liquor") {
+    const response = await fetch(`${endpoint}/liquor.json`, {
+      method: "POST",
+      body: json,
+    });
+    if (response.ok) {
+      console.log("New items added");
+      start();
+    }
+  }
   items.push(newItem);
   console.log(items);
   form.reset();
