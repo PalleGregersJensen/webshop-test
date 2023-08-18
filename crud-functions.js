@@ -13,7 +13,7 @@ async function createNewItemBeer(event) {
   console.log(newItem);
   const json = JSON.stringify(newItem);
   console.log(json);
-  if(type === "beer") {
+  if (type === "beer") {
     const response = await fetch(`${endpoint}/beers.json`, {
       method: "POST",
       body: json,
@@ -49,18 +49,53 @@ function createNewItemObject(name, price, image, description, type) {
   return item;
 }
 
-function updateItemClicked(id, name, description, image, price, type) {
+function updateItemClicked(event) {
   console.log("update item clicked");
-  let updateForm = event.target.parentElement;
-  console.log(updateForm);
-  updateForm.name.value = name;
-  updateForm.price.value = price;
-  updateForm.image.value = image;
-  updateForm.description.value = description;
-  updateForm.type.value = type;
-  updateForm.setAttribute("data-id", id);
+  const clickedItem = event.target.parentElement; // Det klikkede element
+  console.log(clickedItem);
+  const name = clickedItem.querySelector("name");
+  console.log(name);
+  const description = clickedItem.querySelector(".description").textContent;
+  console.log(description);
+
+  // Opdater input-felter med værdierne
+  document.querySelector("#update-name").value = name;
+  document.querySelector("#update-description").value = description;
+
+  // Åbn opdateringsdialogboksen
   document.querySelector("#dialog-update-item").showModal();
 }
+
+// let updateForm = event.target.parentElement.innerHTML;
+// console.log(updateForm);
+// let objectItem = JSON.stringify(updateForm);
+// console.log(objectItem);
+// objectItem = JSON.parse(objectItem);
+// console.log(objectItem);
+// let name = document.querySelector("#update-name");
+// console.log(name);
+// let breakBeforeName = updateForm[10];
+// console.log(breakBeforeName);
+// let breakAfterName =
+// name.value = objectItem.name;
+
+// console.log(data);
+// let firstSepartion = updateForm.lastIndexOf("data-id");
+// firstSepartion = firstSepartion + 4;
+// console.log(firstSepartion);
+// let name = updateForm.slice(firstSepartion, 20);
+// console.log(name);
+// let price = updateForm.price;
+// console.log(price);
+// let image = updateForm.image;
+// console.log(image);
+// let description = updateForm.description;
+// console.log(description);
+// let type = updateForm.type;
+// console.log(type);
+// updateForm.setAttribute("data-id", id);
+//   document.querySelector("#dialog-update-item").showModal();
+// }
 
 async function updateItem(event) {
   console.log("update item");
@@ -76,12 +111,12 @@ async function updateItem(event) {
   const id = form.getAttribute("data-id");
   const response = await updateItemWIthHTTPRequestPut(id, name, description, image, price, type);
   if (response.ok) {
-    console.log("Movie succesfully updatet in firebase");
+    console.log("Item succesfully updated in firebase");
     start();
   } else {
     console.log("Something went wrong. Please try again");
     document.querySelector("#error-message-update").textContent = "Something went wrong. Please try again.";
-    document.querySelector("#update-movie-dialog").showModal();
+    // document.querySelector("#update-movie-dialog").showModal();
   }
 }
 
@@ -102,8 +137,7 @@ async function updateItemWIthHTTPRequestPut(id, name, description, image, price,
       body: json,
     });
     return response;
-  }
-  else if (type === "liquor") {
+  } else if (type === "liquor") {
     const response = await fetch(`${endpoint}/liquor/${id}.json`, {
       method: "PUT",
       body: json,
@@ -123,12 +157,12 @@ async function deleteItemClicked(event) {
   console.log(beerOrLiquorElement);
   beerOrLiquorElement = beerOrLiquorElement.innerText;
   console.log(beerOrLiquorElement);
-  let liquorElementString = beerOrLiquorElement.slice(0, 6); // Corrected conversion
+  let liquorElementString = String(beerOrLiquorElement.slice(6, 12)); // Corrected conversion
   console.log(liquorElementString);
-  let beerElementString = beerOrLiquorElement.slice(0, 4); // Corrected conversion
+  let beerElementString = String(beerOrLiquorElement.slice(6, 10)); // Corrected conversion
   console.log(beerElementString);
 
-  if (beerElementString === "beer") {
+  if (beerElementString == "beer") {
     console.log("delete beer");
     const response = await deleteItemBeer(itemId);
     console.log(response);
@@ -136,7 +170,7 @@ async function deleteItemClicked(event) {
       console.log("Beer item deleted");
       start();
     }
-  } else if (liquorElementString === "liquor") {
+  } else if (liquorElementString == "liquor") {
     console.log("delete liquor");
     const response = await deleteItemLiquor(itemId);
     console.log(response);

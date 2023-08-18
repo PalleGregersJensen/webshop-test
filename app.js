@@ -77,7 +77,7 @@ function prepareData(dataObject) {
 function showItems(beerList) {
   document.querySelector("#items-list").innerHTML = "";
   for (const beer of beerList) {
-    const beerHtml = /*html*/ `<p> ${beer.type} <br>${beer.name} <br>
+    const beerHtml = /*html*/ `<p>Type: ${beer.type} <br> Name: ${beer.name} <br>
 <img src=${beer.image} alt="beer.caption"/> <br> 
 Description: ${beer.description} <br> 
 Price: ${beer.price} <br> 
@@ -96,14 +96,14 @@ Price: ${beer.price} <br>
     // console.log(button);
   }
 
-  // for (const button of deleteItemButtons) {
-  //   button.addEventListener("click", (event) => deleteItemClicked(event));
-  // }
-
   for (const button of deleteItemButtons) {
-    button.addEventListener("click", deleteItemClicked);
-    // console.log(button);
+    button.addEventListener("click", (event) => deleteItemClicked(event));
   }
+
+  // for (const button of deleteItemButtons) {
+  //   button.addEventListener("click", deleteItemClicked);
+  //   // console.log(button);
+  // }
 
   for (const button of updateItemButtons) {
     button.addEventListener("click", updateItemClicked);
