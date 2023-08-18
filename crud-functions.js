@@ -97,14 +97,15 @@ function updateItemClicked(event) {
   let type = clickedItem.slice(firstTypePosition, secondTypePosition - 1);
   console.log(type);
 
+  // Variabler til inputfelter i update form
   let nameInUodateDialog = document.querySelector("#update-name");
   let descriptionInUodateDialog = document.querySelector("#update-description");
   let priceInUodateDialog = document.querySelector("#update-price");
   let imageInUodateDialog = document.querySelector("#update-image");
-  let typeInUodateDialog = document.querySelector("#update-type");
+  // let typeInUodateDialog = document.querySelector("#update-type");
   // let idInUodateDialog = document.querySelector("#update-name");
 
-
+  // Sæt værdier i update form til det samme, som de står i på hjemmeside
   nameInUodateDialog.value = name;
   descriptionInUodateDialog.value = description;
   priceInUodateDialog.value = price;
@@ -116,10 +117,11 @@ function updateItemClicked(event) {
 }
 
 async function updateItem(event) {
+  event.preventDefault();
   console.log("update item");
   const form = event.target;
   console.log(form);
-  const name = form.name.value;
+  const name = form.name;
   console.log(name);
   const description = form.description.value;
   console.log(description);
