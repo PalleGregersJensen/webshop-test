@@ -1,4 +1,4 @@
-import { items, endpoint, start, liquorItems, beerItems } from "./app.js";
+import { items, endpoint, start, liquorItems, beerItems, beerObject } from "./app.js";
 
 async function createNewItemBeer(event) {
   console.log("Create new item");
@@ -38,8 +38,16 @@ function createNewItemObject(name, price, image, description, type) {
   return item;
 }
 
-function updateItemClicked() {
+function updateItemClicked(id, name, description, image, price, type) {
   console.log("update item clicked");
+  let updateForm = event.target.parentElement;
+  console.log(updateForm);
+  updateForm.name.value = name;
+  updateForm.price.value = price;
+  updateForm.image.value = image;
+  updateForm.description.value = description;
+  updateForm.type.value = type;
+  updateForm.setAttribute("data-id", id);
   document.querySelector("#dialog-update-item").showModal();
 }
 
@@ -52,20 +60,44 @@ async function updateItem(event) {
   const description = form.description.value;
   console.log(description);
   const image = form.image.value;
-  const director = form.director.value;
-  const movieLength = Number(form.lengthminutes.value);
-  const yearpublished = Number(form.yearpublished.value);
-  const color = Boolean(form.color.value);
-
+  const price = form.price.value;
+  const type = form.type.value;
   const id = form.getAttribute("data-id");
-  const response = await updateMovie(id, title, description, image, director, movieLength, yearpublished, color);
+  const response = await updateItemWIthHTTPRequestPut(id, name, description, image, price, type);
   if (response.ok) {
     console.log("Movie succesfully updatet in firebase");
-    updateMovieGrid();
+    start();
   } else {
     console.log("Something went wrong. Please try again");
     document.querySelector("#error-message-update").textContent = "Something went wrong. Please try again.";
     document.querySelector("#update-movie-dialog").showModal();
+  }
+}
+
+// update an exitsting movie - HTTP Method: PUT
+async function updateItemWIthHTTPRequestPut(id, name, description, image, price, type) {
+  const itemToUpdate = {
+    name,
+    description,
+    image,
+    type,
+    id,
+    price,
+  }; // item update to update
+  const json = JSON.stringify(itemToUpdate); // convert the JS objekt to JSON string
+  if (type === "beer") {
+    const response = await fetch(`${endpoint}/beer/${id}.json`, {
+      method: "PUT",
+      body: json,
+    });
+    return response;
+  }
+  else if (type === "liquor") {
+    const response = await fetch(`${endpoint}/liquor/${id}.json`, {
+      method: "PUT",
+      body: json,
+    });
+    return response;
   }
 }
 
@@ -78,7 +110,6 @@ async function deleteItemClicked(event) {
   console.log(itemId);
   let beerOrLiquorElement = beerOrLiquorObject.parentElement;
   console.log(beerOrLiquorElement);
-  // beerOrLiquorElement = beerOrLiquorElement.firstChild;
   beerOrLiquorElement = beerOrLiquorElement.innerText;
   console.log(beerOrLiquorElement);
   let liquorElementString = beerOrLiquorElement.slice(0, 6); // Corrected conversion
@@ -113,7 +144,7 @@ async function deleteItemBeer(id) {
   return response;
 }
 
-  // delete an existing item - HTTP Method: DELETE
+// delete an existing item - HTTP Method: DELETE
 async function deleteItemLiquor(id) {
   const response = await fetch(`${endpoint}/liquor/${id}.json`, {
     method: "DELETE",
@@ -121,5 +152,4 @@ async function deleteItemLiquor(id) {
   return response;
 }
 
-  
-export { createNewItemBeer, deleteItemBeer, updateItem, deleteItemClicked, deleteItemLiquor, updateItemClicked};
+export { createNewItemBeer, deleteItemBeer, updateItem, deleteItemClicked, deleteItemLiquor, updateItemClicked };

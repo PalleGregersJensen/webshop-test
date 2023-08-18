@@ -11,6 +11,7 @@ let filteredItems = [];
 let basket = [];
 let price;
 let priceInAll = 0;
+let beerObject;
 
 window.addEventListener("load", start);
 
@@ -32,7 +33,7 @@ async function start() {
   document.querySelector("#sort-by").addEventListener("change", handleSortBy);
   document.querySelector("#search-field").addEventListener("keyup", searchFunction);
   document.querySelector("#create-new-item-button").addEventListener("click", openDialogToCreateNewItem);
-  // document.querySelector("#form-update-item").addEventListener("click", updateItemClicked);
+  document.querySelector("#form-update-item").addEventListener("submit", updateItem);
   // document.querySelector("#form-update-item").showModal();
 }
 function openDialogToCreateNewItem(event) {
@@ -95,14 +96,14 @@ Price: ${beer.price} <br>
     // console.log(button);
   }
 
-  for (const button of deleteItemButtons) {
-    button.addEventListener("click", (event) => deleteItemClicked(event));
-  }
-
   // for (const button of deleteItemButtons) {
-  //   button.addEventListener("click", deleteItemClicked);
-  //   // console.log(button);
+  //   button.addEventListener("click", (event) => deleteItemClicked(event));
   // }
+
+  for (const button of deleteItemButtons) {
+    button.addEventListener("click", deleteItemClicked);
+    // console.log(button);
+  }
 
   for (const button of updateItemButtons) {
     button.addEventListener("click", updateItemClicked);
@@ -253,4 +254,4 @@ function showPriceInAll(basketList) {
   document.querySelector("#basket-total").textContent = `Price in total: ${priceInAll}`;
 }
 
-export { items, endpoint, start, beerItems, liquorItems, };
+export { items, endpoint, start, beerItems, liquorItems, beerObject};
