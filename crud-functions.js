@@ -51,51 +51,69 @@ function createNewItemObject(name, price, image, description, type) {
 
 function updateItemClicked(event) {
   console.log("update item clicked");
-  const clickedItem = event.target.parentElement; // Det klikkede element
+  let clickedItem = event.target.parentElement.innerHTML; // Det klikkede element
   console.log(clickedItem);
-  const name = clickedItem.querySelector("name");
+  clickedItem = String(clickedItem);
+  // Find name
+  let firstNamePosition = clickedItem.search("Name") + 6;
+  console.log(firstNamePosition);
+  let secondNamePosition = clickedItem.indexOf("<br>", 16);
+  console.log(secondNamePosition);
+  let name = clickedItem.slice(firstNamePosition, secondNamePosition - 1);
   console.log(name);
-  const description = clickedItem.querySelector(".description").textContent;
+  // Find description
+  let firstDescriptionPosition = clickedItem.search("Description") + 13;
+  console.log(firstDescriptionPosition);
+  let secondDescriptionPosition = clickedItem.indexOf("Price") - 6;
+  console.log(secondDescriptionPosition);
+  let description = clickedItem.slice(firstDescriptionPosition, secondDescriptionPosition - 1);
   console.log(description);
+  // Find price
+  let firstPricePosition = clickedItem.search("Price") + 7;
+  console.log(firstPricePosition);
+  let secondPricePosition = clickedItem.indexOf("button class") - 7;
+  console.log(secondPricePosition);
+  let price = clickedItem.slice(firstPricePosition, secondPricePosition - 1);
+  console.log(price);
+  // Find id
+  let firstIdPosition = clickedItem.search("data-id") + 9;
+  console.log(firstIdPosition);
+  let secondIdPosition = clickedItem.indexOf("Delete item") - 1;
+  console.log(secondIdPosition);
+  let id = clickedItem.slice(firstIdPosition, secondIdPosition - 1);
+  console.log(id);
+  // Find image
+  let firstImagePosition = clickedItem.search("img src") + 9;
+  console.log(firstImagePosition);
+  let secondImagePosition = clickedItem.indexOf("alt=") - 1;
+  console.log(secondImagePosition);
+  let image = clickedItem.slice(firstImagePosition, secondImagePosition - 1);
+  console.log(image);
+  // Find type
+  let firstTypePosition = clickedItem.search("Type") + 6;
+  console.log(firstTypePosition);
+  let secondTypePosition = clickedItem.indexOf("Name") - 5;
+  console.log(secondTypePosition);
+  let type = clickedItem.slice(firstTypePosition, secondTypePosition - 1);
+  console.log(type);
 
-  // Opdater input-felter med værdierne
-  document.querySelector("#update-name").value = name;
-  document.querySelector("#update-description").value = description;
+  let nameInUodateDialog = document.querySelector("#update-name");
+  let descriptionInUodateDialog = document.querySelector("#update-description");
+  let priceInUodateDialog = document.querySelector("#update-price");
+  let imageInUodateDialog = document.querySelector("#update-image");
+  let typeInUodateDialog = document.querySelector("#update-type");
+  // let idInUodateDialog = document.querySelector("#update-name");
+
+
+  nameInUodateDialog.value = name;
+  descriptionInUodateDialog.value = description;
+  priceInUodateDialog.value = price;
+  imageInUodateDialog.value = image;
+  // typeInUodateDialog.value = type;
 
   // Åbn opdateringsdialogboksen
   document.querySelector("#dialog-update-item").showModal();
 }
-
-// let updateForm = event.target.parentElement.innerHTML;
-// console.log(updateForm);
-// let objectItem = JSON.stringify(updateForm);
-// console.log(objectItem);
-// objectItem = JSON.parse(objectItem);
-// console.log(objectItem);
-// let name = document.querySelector("#update-name");
-// console.log(name);
-// let breakBeforeName = updateForm[10];
-// console.log(breakBeforeName);
-// let breakAfterName =
-// name.value = objectItem.name;
-
-// console.log(data);
-// let firstSepartion = updateForm.lastIndexOf("data-id");
-// firstSepartion = firstSepartion + 4;
-// console.log(firstSepartion);
-// let name = updateForm.slice(firstSepartion, 20);
-// console.log(name);
-// let price = updateForm.price;
-// console.log(price);
-// let image = updateForm.image;
-// console.log(image);
-// let description = updateForm.description;
-// console.log(description);
-// let type = updateForm.type;
-// console.log(type);
-// updateForm.setAttribute("data-id", id);
-//   document.querySelector("#dialog-update-item").showModal();
-// }
 
 async function updateItem(event) {
   console.log("update item");
