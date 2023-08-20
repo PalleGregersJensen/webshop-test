@@ -146,20 +146,43 @@ async function updateItem(event) {
   // const description = form.description.value;
   // console.log(description);
   // let objectItem = createObjectItem();
+
+  // Opdater værdier i update form 
+  let nameInUpdateDialog = document.querySelector("#update-name"); 
+  let descriptionInUodateDialog = document.querySelector("#update-description");
+  let priceInUpdateDialog = document.querySelector("#update-price");
+  let imageInUpdateDialog = document.querySelector("#update-image");
+  // typeInUodateDialog.value = type;
+  
+  
   let objectItem = objectItemArray[0];
   console.log(objectItem);
-  const image = objectItem.image;
+  
+  let image = objectItem.image;
   console.log(image);
-  const price = objectItem.price;
+  imageInUpdateDialog.value = image;
+  console.log(image);
+
+  let price = objectItem.price;
   console.log(price);
-  const type = objectItem.type;
+  priceInUpdateDialog.value = price;
+  console.log(price);
+  
+  let type = objectItem.type;
   console.log(type);
-  const name = objectItem.name;
+  
+  let name = objectItem.name;
   console.log(name);
-  const description = objectItem.description;
+  nameInUpdateDialog.value = name;
+  console.log(name);
+  
+  let description = objectItem.description;
   console.log(description);
-  const id = objectItem.id;
+  descriptionInUodateDialog.value = description;
+  
+  let id = objectItem.id;
   console.log(id);
+  
   const response = await updateItemWIthHTTPRequestPut(id, name, description, image, price, type);
   if (response.ok) {
     console.log("Item succesfully updated in firebase");
