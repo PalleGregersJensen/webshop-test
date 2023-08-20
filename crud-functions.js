@@ -51,6 +51,28 @@ function createNewItemObject(name, price, image, description, type) {
 
 function updateItemClicked(event) {
   console.log("update item clicked");
+  let objectItem = createObjectItem()
+  
+  // Variabler til inputfelter i update form
+  let nameInUodateDialog = document.querySelector("#update-name");
+  let descriptionInUodateDialog = document.querySelector("#update-description");
+  let priceInUodateDialog = document.querySelector("#update-price");
+  let imageInUodateDialog = document.querySelector("#update-image");
+  // let typeInUodateDialog = document.querySelector("#update-type");
+  // let idInUodateDialog = document.querySelector("#update-name");
+
+  // Sæt værdier i update form til det samme, som de står i på hjemmeside
+  nameInUodateDialog.value = objectItem.name;
+  descriptionInUodateDialog.value = objectItem.description;
+  priceInUodateDialog.value = objectItem. price;
+  imageInUodateDialog.value = objectItem.image;
+  // typeInUodateDialog.value = type;
+
+  // Åbn opdateringsdialogboksen
+  document.querySelector("#dialog-update-item").showModal();
+}
+
+function createObjectItem() {
   let clickedItem = event.target.parentElement.innerHTML; // Det klikkede element
   console.log(clickedItem);
   clickedItem = String(clickedItem);
@@ -97,23 +119,16 @@ function updateItemClicked(event) {
   let type = clickedItem.slice(firstTypePosition, secondTypePosition - 1);
   console.log(type);
 
-  // Variabler til inputfelter i update form
-  let nameInUodateDialog = document.querySelector("#update-name");
-  let descriptionInUodateDialog = document.querySelector("#update-description");
-  let priceInUodateDialog = document.querySelector("#update-price");
-  let imageInUodateDialog = document.querySelector("#update-image");
-  // let typeInUodateDialog = document.querySelector("#update-type");
-  // let idInUodateDialog = document.querySelector("#update-name");
-
-  // Sæt værdier i update form til det samme, som de står i på hjemmeside
-  nameInUodateDialog.value = name;
-  descriptionInUodateDialog.value = description;
-  priceInUodateDialog.value = price;
-  imageInUodateDialog.value = image;
-  // typeInUodateDialog.value = type;
-
-  // Åbn opdateringsdialogboksen
-  document.querySelector("#dialog-update-item").showModal();
+  let objectItem = {
+    name: name,
+    description: description,
+    id: id,
+    price: price,
+    image: image,
+    type: type
+  }
+  console.log(objectItem)
+  return objectItem;
 }
 
 async function updateItem(event) {
@@ -121,14 +136,25 @@ async function updateItem(event) {
   console.log("update item");
   const form = event.target;
   console.log(form);
-  const name = form.name;
+  // console.log(form);
+  // const name = form.name;
+  // console.log(name);
+  // const description = form.description.value;
+  // console.log(description);
+  // let objectItem = createObjectItem(form);
+  console.log(objectItem);
+  const image = objectItem.image.value;
+  console.log(image);
+  const price = objectItem.price.value;
+  console.log(price);
+  const type = objectItem.type.value;
+  console.log(type);
+  const name = objectItem.name.value;
   console.log(name);
-  const description = form.description.value;
+  const description = objectItem.description.value;
   console.log(description);
-  const image = form.image.value;
-  const price = form.price.value;
-  const type = form.type.value;
-  const id = form.getAttribute("data-id");
+  const id = objectItem.getAttribute("data-id");
+  console.log(id);
   const response = await updateItemWIthHTTPRequestPut(id, name, description, image, price, type);
   if (response.ok) {
     console.log("Item succesfully updated in firebase");
