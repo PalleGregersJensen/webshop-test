@@ -1,4 +1,4 @@
-import { items, endpoint, start, liquorItems, beerItems, beerObject } from "./app.js";
+import { items, endpoint, start, liquorItems, beerItems, objectItemArray } from "./app.js";
 
 async function createNewItemBeer(event) {
   console.log("Create new item");
@@ -51,8 +51,10 @@ function createNewItemObject(name, price, image, description, type) {
 
 function updateItemClicked(event) {
   console.log("update item clicked");
-  let objectItem = createObjectItem()
-  
+  let objectItem = createObjectItem();
+  objectItemArray.push(objectItem);
+  console.log(objectItemArray);
+
   // Variabler til inputfelter i update form
   let nameInUodateDialog = document.querySelector("#update-name");
   let descriptionInUodateDialog = document.querySelector("#update-description");
@@ -64,12 +66,14 @@ function updateItemClicked(event) {
   // Sæt værdier i update form til det samme, som de står i på hjemmeside
   nameInUodateDialog.value = objectItem.name;
   descriptionInUodateDialog.value = objectItem.description;
-  priceInUodateDialog.value = objectItem. price;
+  priceInUodateDialog.value = objectItem.price;
   imageInUodateDialog.value = objectItem.image;
   // typeInUodateDialog.value = type;
 
+  
   // Åbn opdateringsdialogboksen
   document.querySelector("#dialog-update-item").showModal();
+  document.querySelector("#form-update-item").addEventListener("submit", updateItem);
 }
 
 function createObjectItem() {
@@ -118,42 +122,43 @@ function createObjectItem() {
   console.log(secondTypePosition);
   let type = clickedItem.slice(firstTypePosition, secondTypePosition - 1);
   console.log(type);
-
+  
   let objectItem = {
     name: name,
     description: description,
     id: id,
     price: price,
     image: image,
-    type: type
-  }
-  console.log(objectItem)
+    type: type,
+  };
+  console.log(objectItem);
   return objectItem;
 }
 
 async function updateItem(event) {
   event.preventDefault();
   console.log("update item");
-  const form = event.target;
-  console.log(form);
+  // const form = event.target;
+  // console.log(form);
   // console.log(form);
   // const name = form.name;
   // console.log(name);
   // const description = form.description.value;
   // console.log(description);
-  // let objectItem = createObjectItem(form);
+  // let objectItem = createObjectItem();
+  let objectItem = objectItemArray[0];
   console.log(objectItem);
-  const image = objectItem.image.value;
+  const image = objectItem.image;
   console.log(image);
-  const price = objectItem.price.value;
+  const price = objectItem.price;
   console.log(price);
-  const type = objectItem.type.value;
+  const type = objectItem.type;
   console.log(type);
-  const name = objectItem.name.value;
+  const name = objectItem.name;
   console.log(name);
-  const description = objectItem.description.value;
+  const description = objectItem.description;
   console.log(description);
-  const id = objectItem.getAttribute("data-id");
+  const id = objectItem.id;
   console.log(id);
   const response = await updateItemWIthHTTPRequestPut(id, name, description, image, price, type);
   if (response.ok) {
@@ -164,6 +169,8 @@ async function updateItem(event) {
     document.querySelector("#error-message-update").textContent = "Something went wrong. Please try again.";
     // document.querySelector("#update-movie-dialog").showModal();
   }
+  objectItemArray.pop();
+  console.log(objectItemArray);
 }
 
 // update an exitsting movie - HTTP Method: PUT
@@ -178,12 +185,16 @@ async function updateItemWIthHTTPRequestPut(id, name, description, image, price,
   }; // item update to update
   const json = JSON.stringify(itemToUpdate); // convert the JS objekt to JSON string
   if (type === "beer") {
-    const response = await fetch(`${endpoint}/beer/${id}.json`, {
+    console.log(type);
+    console.log(id);
+    const response = await fetch(`${endpoint}/beers/${id}.json`, {
       method: "PUT",
       body: json,
     });
     return response;
   } else if (type === "liquor") {
+    console.log(type);
+    console.log(id);
     const response = await fetch(`${endpoint}/liquor/${id}.json`, {
       method: "PUT",
       body: json,

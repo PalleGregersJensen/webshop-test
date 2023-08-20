@@ -11,7 +11,7 @@ let filteredItems = [];
 let basket = [];
 let price;
 let priceInAll = 0;
-let beerObject;
+let objectItemArray = [];
 
 window.addEventListener("load", start);
 
@@ -33,7 +33,7 @@ async function start() {
   document.querySelector("#sort-by").addEventListener("change", handleSortBy);
   document.querySelector("#search-field").addEventListener("keyup", searchFunction);
   document.querySelector("#create-new-item-button").addEventListener("click", openDialogToCreateNewItem);
-  document.querySelector("#form-update-item").addEventListener("submit", updateItem);
+  // document.querySelector("#form-update-item").addEventListener("submit", updateItem);
   // document.querySelector("#form-update-item").showModal();
 }
 function openDialogToCreateNewItem(event) {
@@ -254,4 +254,4 @@ function showPriceInAll(basketList) {
   document.querySelector("#basket-total").textContent = `Price in total: ${priceInAll}`;
 }
 
-export { items, endpoint, start, beerItems, liquorItems, beerObject};
+export { items, endpoint, start, beerItems, liquorItems, objectItemArray};
