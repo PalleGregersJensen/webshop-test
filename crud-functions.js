@@ -70,7 +70,6 @@ function updateItemClicked(event) {
   imageInUodateDialog.value = objectItem.image;
   // typeInUodateDialog.value = type;
 
-  
   // Åbn opdateringsdialogboksen
   document.querySelector("#dialog-update-item").showModal();
   document.querySelector("#form-update-item").addEventListener("submit", updateItem);
@@ -122,7 +121,7 @@ function createObjectItem() {
   console.log(secondTypePosition);
   let type = clickedItem.slice(firstTypePosition, secondTypePosition - 1);
   console.log(type);
-  
+
   let objectItem = {
     name: name,
     description: description,
@@ -147,42 +146,41 @@ async function updateItem(event) {
   // console.log(description);
   // let objectItem = createObjectItem();
 
-  // Opdater værdier i update form 
-  let nameInUpdateDialog = document.querySelector("#update-name"); 
+  // Opdater værdier i update form
+  let nameInUpdateDialog = document.querySelector("#update-name");
   let descriptionInUodateDialog = document.querySelector("#update-description");
   let priceInUpdateDialog = document.querySelector("#update-price");
   let imageInUpdateDialog = document.querySelector("#update-image");
   // typeInUodateDialog.value = type;
-  
-  
+
   let objectItem = objectItemArray[0];
   console.log(objectItem);
-  
+  // Image
   let image = objectItem.image;
   console.log(image);
-  imageInUpdateDialog.value = image;
+  image = imageInUpdateDialog.value;
   console.log(image);
-
+  // Price
   let price = objectItem.price;
   console.log(price);
-  priceInUpdateDialog.value = price;
+  price = priceInUpdateDialog.value;
   console.log(price);
-  
+  // Type
   let type = objectItem.type;
   console.log(type);
-  
+  // Name
   let name = objectItem.name;
   console.log(name);
-  nameInUpdateDialog.value = name;
+  name = nameInUpdateDialog.value;
   console.log(name);
-  
+  // Description
   let description = objectItem.description;
   console.log(description);
-  descriptionInUodateDialog.value = description;
-  
+  description = descriptionInUodateDialog.value;
+  // Id
   let id = objectItem.id;
   console.log(id);
-  
+
   const response = await updateItemWIthHTTPRequestPut(id, name, description, image, price, type);
   if (response.ok) {
     console.log("Item succesfully updated in firebase");
