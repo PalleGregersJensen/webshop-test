@@ -153,7 +153,7 @@ async function updateItem(event) {
   let imageInUpdateDialog = document.querySelector("#update-image");
   // typeInUodateDialog.value = type;
 
-  let objectItem = objectItemArray[0];
+  let objectItem = objectItemArray[objectItemArray.length-1];
   console.log(objectItem);
   // Image
   let image = objectItem.image;
